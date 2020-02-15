@@ -1,6 +1,5 @@
 # Project three: Landmark Detection & Robot Tracking (SLAM)
 
-# Landmark Detection & Robot Tracking (SLAM)
 
 ## Project Overview
 SLAM project for "Computer Vision Expert" Udacity Nanodegree Program.

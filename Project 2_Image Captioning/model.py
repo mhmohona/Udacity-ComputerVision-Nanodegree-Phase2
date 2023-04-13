@@ -39,20 +39,17 @@ class DecoderRNN(nn.Module):
         embeddings = torch.cat((features.unsqueeze(1), cap_embedding), 1)
         #print('in decoderrnn forward, embedding shape ', embeddings.shape)
         #packed = pack_padded_sequence(embeddings, lengths, batch_first=True)
-        
+
         #lstm_out, self.hidden = self.lstm(embeddings, self.hidden)  
         #lstm_out, self.hidden = self.lstm(embeddings.view(len(embeddings), 1, -1), self.hidden) 
         lstm_out, self.hidden = self.lstm(embeddings)
-        outputs = self.linear(lstm_out)
-        
-        #return outputs[:,1:,:]
-        return outputs
+        return self.linear(lstm_out)
 
     
     def sample(self, inputs, hidden=None, max_len=20):
         " accepts pre-processed image tensor (inputs) and returns predicted sentence (list of tensor ids of length max_len) "
         res = []
-        for i in range(max_len):
+        for _ in range(max_len):
             outputs, hidden = self.lstm(inputs, hidden)
 #             print('lstm output shape ', outputs.shape)
 #             print('lstm output.squeeze(1) shape ', outputs.squeeze(1).shape)
